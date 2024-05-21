@@ -14,6 +14,11 @@
 		0E0332152BFBE80C0082E36B /* Chuck_Norris_JokesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0332142BFBE80C0082E36B /* Chuck_Norris_JokesTests.swift */; };
 		0E03321F2BFBE80C0082E36B /* Chuck_Norris_JokesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E03321E2BFBE80C0082E36B /* Chuck_Norris_JokesUITests.swift */; };
 		0E0332212BFBE80C0082E36B /* Chuck_Norris_JokesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0332202BFBE80C0082E36B /* Chuck_Norris_JokesUITestsLaunchTests.swift */; };
+		0E03322E2BFBE8790082E36B /* JokesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E03322D2BFBE8790082E36B /* JokesModel.swift */; };
+		0E0332302BFBE9D50082E36B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E03322F2BFBE9D50082E36B /* NetworkManager.swift */; };
+		0E0332322BFBF0130082E36B /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0332312BFBF0130082E36B /* HomePage.swift */; };
+		0E0332342BFBF1C30082E36B /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0332332BFBF1C30082E36B /* HomePageViewModel.swift */; };
+		0E0332362BFBFF970082E36B /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0332352BFBFF970082E36B /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,11 @@
 		0E03321A2BFBE80C0082E36B /* Chuck Norris JokesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chuck Norris JokesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E03321E2BFBE80C0082E36B /* Chuck_Norris_JokesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chuck_Norris_JokesUITests.swift; sourceTree = "<group>"; };
 		0E0332202BFBE80C0082E36B /* Chuck_Norris_JokesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chuck_Norris_JokesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0E03322D2BFBE8790082E36B /* JokesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesModel.swift; sourceTree = "<group>"; };
+		0E03322F2BFBE9D50082E36B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		0E0332312BFBF0130082E36B /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		0E0332332BFBF1C30082E36B /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
+		0E0332352BFBFF970082E36B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +104,12 @@
 		0E0332022BFBE8090082E36B /* Chuck Norris Jokes */ = {
 			isa = PBXGroup;
 			children = (
-				0E0332032BFBE8090082E36B /* Chuck_Norris_JokesApp.swift */,
-				0E0332052BFBE8090082E36B /* ContentView.swift */,
+				0E0332392BFCD0480082E36B /* Models */,
+				0E03323B2BFCD08B0082E36B /* Views */,
+				0E03323A2BFCD0830082E36B /* ViewModels */,
+				0E0332372BFCD0320082E36B /* Managers */,
 				0E0332072BFBE80B0082E36B /* Assets.xcassets */,
+				0E0332032BFBE8090082E36B /* Chuck_Norris_JokesApp.swift */,
 				0E0332092BFBE80B0082E36B /* Preview Content */,
 			);
 			path = "Chuck Norris Jokes";
@@ -125,6 +138,40 @@
 				0E0332202BFBE80C0082E36B /* Chuck_Norris_JokesUITestsLaunchTests.swift */,
 			);
 			path = "Chuck Norris JokesUITests";
+			sourceTree = "<group>";
+		};
+		0E0332372BFCD0320082E36B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0E0332352BFBFF970082E36B /* UserDefaultsManager.swift */,
+				0E03322F2BFBE9D50082E36B /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		0E0332392BFCD0480082E36B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0E03322D2BFBE8790082E36B /* JokesModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0E03323A2BFCD0830082E36B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0E0332332BFBF1C30082E36B /* HomePageViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0E03323B2BFCD08B0082E36B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0E0332312BFBF0130082E36B /* HomePage.swift */,
+				0E0332052BFBE8090082E36B /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +304,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E0332322BFBF0130082E36B /* HomePage.swift in Sources */,
+				0E0332302BFBE9D50082E36B /* NetworkManager.swift in Sources */,
+				0E0332342BFBF1C30082E36B /* HomePageViewModel.swift in Sources */,
+				0E0332362BFBFF970082E36B /* UserDefaultsManager.swift in Sources */,
+				0E03322E2BFBE8790082E36B /* JokesModel.swift in Sources */,
 				0E0332062BFBE8090082E36B /* ContentView.swift in Sources */,
 				0E0332042BFBE8090082E36B /* Chuck_Norris_JokesApp.swift in Sources */,
 			);
