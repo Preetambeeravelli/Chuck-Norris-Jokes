@@ -9,6 +9,7 @@ import Foundation
 
 class UserDefaultsManager {
     static let shared = UserDefaultsManager()
+    private let favoritesKey = "favoriteJokes"
     
     private init() {}
     
@@ -26,4 +27,40 @@ class UserDefaultsManager {
         }
         return nil
     }
+}
+
+extension UserDefaultsManager{
+    func saveFavorites(_ jokes: [JokesModel]) {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(jokes) {
+                UserDefaults.standard.set(encoded, forKey: favoritesKey)
+            }
+        }
+        
+        func loadFavorites() -> [JokesModel] {
+            if let savedData = UserDefaults.standard.data(forKey: favoritesKey) {
+                let decoder = JSONDecoder()
+                return (try? decoder.decode([JokesModel].self, from: savedData)) ?? []
+            }
+            return []
+        }
+        
+        func addToFavorites(_ joke: JokesModel) {
+            var currentFavorites = loadFavorites()
+            if !currentFavorites.contains(where: { $0.id == joke.id }) {
+                currentFavorites.append(joke)
+                saveFavorites(currentFavorites)
+            }
+        }
+        
+        func removeFromFavorites(_ joke: JokesModel) {
+            var currentFavorites = loadFavorites()
+            currentFavorites.removeAll { $0.id == joke.id }
+            saveFavorites(currentFavorites)
+        }
+        
+        func isFavorite(_ joke: JokesModel) -> Bool {
+            let currentFavorites = loadFavorites()
+            return currentFavorites.contains { $0.id == joke.id }
+        }
 }

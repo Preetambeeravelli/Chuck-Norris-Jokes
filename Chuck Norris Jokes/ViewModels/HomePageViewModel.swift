@@ -7,11 +7,16 @@
 
 import Foundation
 
+@MainActor
 class HomePageViewModel: ObservableObject{
     @Published var joke: JokesModel?
     @Published var favouriteJokes: [JokesModel] = []
     let networkManager = NetworkManager<JokesModel>(requestType: .random)
     let userDefaultsManager = UserDefaultsManager.shared
+    
+    init() {
+            loadFavorites()
+        }
     
     func fetchRandomQuotes(){
         networkManager.makeRequest { result in
@@ -24,27 +29,22 @@ class HomePageViewModel: ObservableObject{
         }
     }
     
-    func addToFavorites(_ fact: JokesModel) {
-            favouriteJokes.append(fact)
-            saveFavorites()
-        }
+    func addToFavorites(_ joke: JokesModel) {
+        userDefaultsManager.addToFavorites(joke)
+        loadFavorites()
+    }
+    
+    func removeFromFavorites(_ joke: JokesModel) {
+        userDefaultsManager.removeFromFavorites(joke)
+        loadFavorites()
+    }
+    
+    func isFavorite(_ joke: JokesModel) -> Bool {
+        return userDefaultsManager.isFavorite(joke)
+    }
+    
+    private func loadFavorites() {
+        favouriteJokes = userDefaultsManager.loadFavorites()
+    }
 
-        func removeFromFavorites(_ fact: JokesModel) {
-            favouriteJokes.removeAll { $0.id == fact.id }
-            saveFavorites()
-        }
-
-        func isFavorite(_ fact: JokesModel) -> Bool {
-            return favouriteJokes.contains { $0.id == fact.id }
-        }
-
-        private func saveFavorites() {
-            userDefaultsManager.save(favouriteJokes, forKey: "favouriteJokes")
-        }
-
-        private func loadFavorites() {
-            if let favorites: [JokesModel] = userDefaultsManager.load(forKey: "favouriteJokes", as: [JokesModel].self) {
-                favouriteJokes = favorites
-            }
-        }
 }

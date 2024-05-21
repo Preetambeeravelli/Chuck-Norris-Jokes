@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomePage: View {
     @StateObject var homePageVM = HomePageViewModel()
+    @State var hasFetched = false
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         VStack {
             Text("Random Joke")
@@ -33,11 +35,10 @@ struct HomePage: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(lineWidth: 2)
-                            .fill(Color.black)
+//                            .fill(Color.black)
                             .frame(width: UIScreen.main.bounds.width * 0.7, height: 70, alignment: .center)
                         Text("Refresh")
                             .font(.system(size: 24, weight: .bold, design: .monospaced))
-                            .foregroundColor(.black)
                     }
                 })
                 
@@ -53,19 +54,22 @@ struct HomePage: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(lineWidth: 2)
-                            .fill(Color.black)
                             .frame(height: 70)
                         Image(systemName: homePageVM.joke.flatMap { homePageVM.isFavorite($0) } == true ? "heart.fill" : "heart")
                             .font(.title)
                             .fontWeight(.semibold)
-                            .foregroundColor(.black)
+//                            .foregroundColor(.black)
                     }
                 })
             }
+            .accentColor(colorScheme == .dark ? Color.white : Color.black)
         }
-        .padding()
+        .padding([.top, .horizontal])
         .onAppear {
-            homePageVM.fetchRandomQuotes()
+            if !hasFetched {
+                homePageVM.fetchRandomQuotes()
+                hasFetched = true
+            }
         }
     }
 }
