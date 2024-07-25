@@ -34,6 +34,7 @@ struct FavouritesPage: View {
                 vm.loadFavorites()
             }
         }
+        
     }
 }
 

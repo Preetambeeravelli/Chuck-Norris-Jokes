@@ -44,4 +44,5 @@ struct CategoriesScrollView: View {
 
 #Preview {
     CategoriesScrollView(selectedCategory: .constant("animal"))
+        .previewLayout(.sizeThatFits)
 }

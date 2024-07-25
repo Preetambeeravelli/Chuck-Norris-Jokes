@@ -17,10 +17,10 @@ struct FavouritePageRow: View {
                     Text("\(joke.capitalized)")
                         .font(.system(.body, design: .monospaced))
                         .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.6)
                         .padding()
                 }
         }
-        .padding(.horizontal)
         
     }
 }

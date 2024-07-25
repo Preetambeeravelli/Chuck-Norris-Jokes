@@ -38,7 +38,6 @@ struct TabBarView: View {
                         }
                     }
                 }
-                
         }
         .padding(.horizontal)
     }

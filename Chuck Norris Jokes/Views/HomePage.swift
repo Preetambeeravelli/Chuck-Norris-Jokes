@@ -12,6 +12,7 @@ struct HomePage: View {
     @State var hasFetched = false
     @Environment(\.colorScheme) var colorScheme
     @State var selectedCategory: String = ""
+    
     var body: some View {
         VStack{
             VStack(spacing: 0){
@@ -22,11 +23,18 @@ struct HomePage: View {
                     .stroke(lineWidth: 2)
                     .overlay {
                         if let joke = homePageVM.joke {
-                            Text("\(joke.value.capitalized)")
-                                .multilineTextAlignment(.leading)
-                                .font(.system(size: 36, weight: .semibold, design: .monospaced))
-                                .minimumScaleFactor(0.6)
-                                .padding()
+                            switch homePageVM.isLoading{
+                            case false:
+                                Text("\(joke.value.capitalized)")
+                                    .multilineTextAlignment(.leading)
+                                    .font(.system(size: 36, weight: .semibold, design: .monospaced))
+                                    .minimumScaleFactor(0.6)
+                                    .frame(alignment: .leading)
+                                    .padding()
+                            case true:
+                                ProgressView()
+                            }
+                            
                         }
                     }
             }
@@ -71,7 +79,7 @@ struct HomePage: View {
                 hasFetched = true
             }
         }
-        .onChange(of: selectedCategory) { 
+        .onChange(of: selectedCategory) {
             homePageVM.fetchRandomQuotesWith(category: selectedCategory)
         }
     }

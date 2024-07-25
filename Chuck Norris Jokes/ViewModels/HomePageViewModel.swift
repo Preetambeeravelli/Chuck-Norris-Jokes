@@ -11,6 +11,7 @@ import Foundation
 class HomePageViewModel: ObservableObject{
     @Published var joke: JokesModel?
     @Published var favouriteJokes: [JokesModel] = []
+    @Published var isLoading: Bool = false
     let networkManager = NetworkManager<JokesModel>(requestType: .random)
     let userDefaultsManager = UserDefaultsManager.shared
     
@@ -19,11 +20,13 @@ class HomePageViewModel: ObservableObject{
         }
     
     func fetchRandomQuotes(){
+        isLoading = true
         networkManager.makeRequest { result in
             switch result {
             case .success(let joke):
                 DispatchQueue.main.async{
                     self.joke = joke
+                    self.isLoading = false
                 }
             case .failure(let error):
                 print("Error: \(error)")
