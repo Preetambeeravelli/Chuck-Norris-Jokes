@@ -22,7 +22,9 @@ class HomePageViewModel: ObservableObject{
         networkManager.makeRequest { result in
             switch result {
             case .success(let joke):
-                self.joke = joke
+                DispatchQueue.main.async{
+                    self.joke = joke
+                }
             case .failure(let error):
                 print("Error: \(error)")
             }

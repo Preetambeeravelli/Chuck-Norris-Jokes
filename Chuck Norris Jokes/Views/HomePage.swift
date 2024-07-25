@@ -11,23 +11,25 @@ struct HomePage: View {
     @StateObject var homePageVM = HomePageViewModel()
     @State var hasFetched = false
     @Environment(\.colorScheme) var colorScheme
+    @State var selectedCategory: String = ""
     var body: some View {
-        VStack {
-            Text("Random Joke")
-                .font(.system(size: 36, weight: .heavy, design: .monospaced))
-            
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(lineWidth: 2)
-                .overlay {
-                    if let joke = homePageVM.joke {
-                        Text("\(joke.value.capitalized)")
-                            .multilineTextAlignment(.leading)
-                            .font(.system(size: 36, weight: .semibold, design: .monospaced))
-                            .minimumScaleFactor(0.6)
-                            .padding()
+        VStack{
+            VStack(spacing: 0){
+                Text("Random Joke")
+                    .font(.system(size: 36, weight: .heavy, design: .monospaced))
+                CategoriesScrollView(selectedCategory: $selectedCategory)
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 2)
+                    .overlay {
+                        if let joke = homePageVM.joke {
+                            Text("\(joke.value.capitalized)")
+                                .multilineTextAlignment(.leading)
+                                .font(.system(size: 36, weight: .semibold, design: .monospaced))
+                                .minimumScaleFactor(0.6)
+                                .padding()
+                        }
                     }
-                }
-            
+            }
             HStack {
                 Button(action: {
                     homePageVM.fetchRandomQuotes()
@@ -35,7 +37,6 @@ struct HomePage: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(lineWidth: 2)
-//                            .fill(Color.black)
                             .frame(width: UIScreen.main.bounds.width * 0.7, height: 70, alignment: .center)
                         Text("Refresh")
                             .font(.system(size: 24, weight: .bold, design: .monospaced))
@@ -58,11 +59,10 @@ struct HomePage: View {
                         Image(systemName: homePageVM.joke.flatMap { homePageVM.isFavorite($0) } == true ? "heart.fill" : "heart")
                             .font(.title)
                             .fontWeight(.semibold)
-//                            .foregroundColor(.black)
                     }
                 })
             }
-            .accentColor(colorScheme == .dark ? Color.white : Color.black)
+            .tint(colorScheme == .dark ? Color.white : Color.black)
         }
         .padding([.top, .horizontal])
         .onAppear {

@@ -20,6 +20,7 @@ struct ContentView: View {
                 TabView(selection: $tabSelected) {
                     HomePage().tag(Tab.house)
                     FavouritesPage().tag(Tab.heart)
+                    Text("Settings Page").tag(Tab.magnifyingglass)
                 }
                 VStack {
                     TabBarView(currentTab: $tabSelected)

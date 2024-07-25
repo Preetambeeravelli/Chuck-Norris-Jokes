@@ -8,26 +8,31 @@
 import SwiftUI
 
 struct FavouritesPage: View {
-    @StateObject var vm = FavouritesPageViewModel()
+    @ObservedObject var vm = FavouritesPageViewModel()
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
                 List {
                     ForEach(vm.favouriteJokes) { favJoke in
-                        FavouritePageRow(joke: favJoke.value)
-                            .frame(height: geometry.size.height / 4)
-                    }
-                    .refreshable {
-                        vm.loadFavorites()
+                        NavigationLink {
+                            FavouriteDetalPageView(viewModel: FavouritesDetailPageViewModel(favJokeModel: favJoke))
+                        } label: {
+                            FavouritePageRow(joke: favJoke.value)
+                                .frame(height: geometry.size.height / 4)
+                        }
                     }
                     .listRowSeparator(.hidden)
                 }
+                .scrollIndicators(.hidden)
                 .listStyle(PlainListStyle())
+                .refreshable {
+                    vm.loadFavorites()
+                }
             }
             .navigationTitle("Favourites")
-        }
-        .task{
-            vm.loadFavorites()
+            .onAppear{
+                vm.loadFavorites()
+            }
         }
     }
 }
