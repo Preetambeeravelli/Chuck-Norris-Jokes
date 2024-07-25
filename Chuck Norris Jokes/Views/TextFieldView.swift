@@ -32,6 +32,7 @@ struct TextFieldView: View {
                     )
             })
         }
+        .padding(.horizontal, 10)
         .tint(colorScheme == .dark ? Color.white : Color.black)
     }
 }

@@ -11,7 +11,7 @@ struct HomePage: View {
     @StateObject var homePageVM = HomePageViewModel()
     @State var hasFetched = false
     @Environment(\.colorScheme) var colorScheme
-    @State var selectedCategory: String = ""
+    @State var selectedCategory: String? = nil
     
     var body: some View {
         VStack{

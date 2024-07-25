@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchView: View {
     @State var searchText: String = ""
     @StateObject var vm = SearchViewModel()
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
             VStack{
@@ -22,6 +23,7 @@ struct SearchView: View {
                         ForEach(vm.searchResults) { favJoke in
                             NavigationLink {
                                 FavouriteDetalPageView(viewModel: FavouritesDetailPageViewModel(favJokeModel: favJoke))
+                                    .toolbarRole(.editor)
                             } label: {
                                 FavouritePageRow(joke: favJoke.value)
                                     .frame(height: geometry.size.height / 4)
@@ -35,6 +37,7 @@ struct SearchView: View {
                 .navigationTitle("Search Norris")
             }
         }
+        .tint(colorScheme == .dark ? Color.white : Color.black)
     }
 }
 

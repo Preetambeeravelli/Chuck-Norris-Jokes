@@ -34,7 +34,8 @@ class HomePageViewModel: ObservableObject{
         }
     }
     
-    func fetchRandomQuotesWith(category: String){
+    func fetchRandomQuotesWith(category: String?){
+        guard let category = category else {return}
         let networkManager2 = NetworkManager<JokesModel>(requestType: .categorySearch(category.lowercased()))
         networkManager2.makeRequest { result in
             switch result {

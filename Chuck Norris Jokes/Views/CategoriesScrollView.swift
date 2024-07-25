@@ -10,7 +10,7 @@ import SwiftUI
 struct CategoriesScrollView: View {
     @StateObject var categoriesViewModel = CategoriesViewModel()
     @Environment(\.colorScheme) var colorScheme
-    @Binding var selectedCategory: String
+    @Binding var selectedCategory: String?
     
     var body: some View {
         ScrollView(.horizontal) {
