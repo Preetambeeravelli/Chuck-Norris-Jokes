@@ -31,6 +31,19 @@ class HomePageViewModel: ObservableObject{
         }
     }
     
+    func fetchRandomQuotesWith(category: String){
+        let networkManager2 = NetworkManager<JokesModel>(requestType: .categorySearch(category.lowercased()))
+        networkManager2.makeRequest { result in
+            switch result {
+            case .success(let joke):
+                DispatchQueue.main.async{
+                    self.joke = joke
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
     func addToFavorites(_ joke: JokesModel) {
         userDefaultsManager.addToFavorites(joke)
         loadFavorites()

@@ -8,4 +8,5 @@
 import Foundation
 struct JokesModel: Codable, Identifiable{
     let id, value:String
+    let categories: [String?]
 }

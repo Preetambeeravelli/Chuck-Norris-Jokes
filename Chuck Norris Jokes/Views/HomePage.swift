@@ -71,6 +71,9 @@ struct HomePage: View {
                 hasFetched = true
             }
         }
+        .onChange(of: selectedCategory) { 
+            homePageVM.fetchRandomQuotesWith(category: selectedCategory)
+        }
     }
 }
 

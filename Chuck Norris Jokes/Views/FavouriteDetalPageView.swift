@@ -56,5 +56,5 @@ struct FavouriteDetalPageView: View {
 }
 
 #Preview {
-    FavouriteDetalPageView(viewModel: FavouritesDetailPageViewModel(favJokeModel: JokesModel(id: "dssfd", value: "This is a preview")))
+    FavouriteDetalPageView(viewModel: FavouritesDetailPageViewModel(favJokeModel: JokesModel(id: "dssfd", value: "This is a preview", categories: [])))
 }

@@ -46,6 +46,8 @@ class NetworkManager<T: Codable> {
             return
         }
         
+        print(url)
+        
         let urlRequest = URLRequest(url: url)
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
