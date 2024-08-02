@@ -24,6 +24,14 @@ class HomePageViewModel: ObservableObject{
     init() {
             loadFavorites()
         }
+    func fetchAppropriateQuote(){
+        switch selectedCategory{
+        case .none:
+            fetchRandomQuotes()
+        case .some(let category):
+            fetchRandomQuotesWith(category: category)
+        }
+    }
     
     func fetchRandomQuotes(){
         isLoading = true
