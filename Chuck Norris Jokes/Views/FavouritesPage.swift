@@ -38,7 +38,6 @@ struct FavouritesPage: View {
             }
         }
         .tint(colorScheme == .dark ? Color.white : Color.black)
-        
     }
 }
 

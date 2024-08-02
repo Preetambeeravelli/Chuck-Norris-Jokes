@@ -22,7 +22,6 @@ struct FavouritePageRow: View {
                         .padding()
                 }
         }
-        
     }
 }
 
