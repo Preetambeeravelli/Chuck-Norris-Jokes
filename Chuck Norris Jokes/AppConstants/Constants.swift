@@ -26,6 +26,7 @@ enum systemImageNames: String{
 enum ButtonImage: String{
     case share = "square.and.arrow.up"
     case heart = "heart"
+    case heartFill = "heart.fill"
 }
 
 enum Tab: String, CaseIterable{

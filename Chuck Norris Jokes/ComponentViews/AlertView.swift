@@ -9,13 +9,18 @@ import SwiftUI
 
 struct AlertView: View {
     var title: String
-    var message: String
+    var message: String?
     var dismissAction: () -> Void
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Norris is Busy")
+            Text(title)
                 .font(.system(size: 36, weight: .heavy, design: .monospaced))
+                .minimumScaleFactor(0.7)
+            if message != nil{
+                Text(message ?? "")
+                    .font(.system(size: 24, weight: .heavy, design: .monospaced))
+            }
             Button(action: {
                 dismissAction()
             }, label: {
@@ -36,5 +41,6 @@ struct AlertView: View {
 
 
 #Preview {
-    AlertView(title: "OOps", message: "Norris is Busy", dismissAction: {print("Button Tapped")})
+    AlertView(title: "Norris is Busy", message: "Please try again later", dismissAction: {print("Button Tapped")})
+//    AlertView(title: "Norris is Busy", dismissAction: {print("Button Tapped")})
 }

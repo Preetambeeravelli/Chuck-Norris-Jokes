@@ -29,10 +29,10 @@ struct FavouriteDetalPageView: View {
                 Button(action: {
                     viewModel.toggleFavoriteStatus()
                 }, label: {
-                    AppButtonView(buttonImage: .heart)
+                    AppButtonView(buttonImage: viewModel.isFavorite ? .heartFill : .heart)
                 })
             }
-            .tint(colorScheme == . dark ? Color.white :Color.black)
+            .tint(colorScheme == . dark ? Color.white : Color.black)
         }
         .navigationTitle(NavigationTitles.favourite.rawValue)
         .navigationBarTitleDisplayMode(.inline)

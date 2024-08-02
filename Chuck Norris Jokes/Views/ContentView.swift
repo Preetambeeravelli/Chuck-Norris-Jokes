@@ -24,6 +24,7 @@ struct ContentView: View {
                 }
                 VStack {
                     TabBarView(currentTab: $tabSelected)
+                        .padding(.bottom, 10)
                 }
                 .padding(.top, 2)
             }

@@ -14,28 +14,37 @@ struct SearchView: View {
     
     var body: some View {
         NavigationStack {
-            VStack{
-                TextFieldView(searchText: $searchViewModel.searchText) {
-                    searchViewModel.fetchQuotesWithSearchText(searchText: searchViewModel.searchText)
-                    searchViewModel.emptySearchText()
-                }
-                GeometryReader{ geometry in
-                    List {
-                        ForEach(searchViewModel.searchResults) { favJoke in
-                            NavigationLink {
-                                FavouriteDetalPageView(viewModel: FavouritesDetailPageViewModel(favJokeModel: favJoke))
-                                    .toolbarRole(.editor)
-                            } label: {
-                                FavouritePageRow(joke: favJoke.value)
-                                    .frame(height: geometry.size.height / 4)
-                            }
-                        }
-                        .listRowSeparator(.hidden)
+            ZStack {
+                switch searchViewModel.hasError{
+                case true:
+                    AlertView(title: "Norris is Busy") {
+                        searchViewModel.changeErrorStatus()
                     }
-                    .scrollIndicators(.hidden)
-                    .listStyle(PlainListStyle())
+                case false:
+                    VStack{
+                        TextFieldView(searchText: $searchViewModel.searchText) {
+                            searchViewModel.fetchQuotesWithSearchText(searchText: searchViewModel.searchText)
+                            searchViewModel.emptySearchText()
+                        }
+                        GeometryReader{ geometry in
+                            List {
+                                ForEach(searchViewModel.searchResults) { favJoke in
+                                    NavigationLink {
+                                        FavouriteDetalPageView(viewModel: FavouritesDetailPageViewModel(favJokeModel: favJoke))
+                                            .toolbarRole(.editor)
+                                    } label: {
+                                        FavouritePageRow(joke: favJoke.value)
+                                            .frame(height: geometry.size.height / 4)
+                                    }
+                                }
+                                .listRowSeparator(.hidden)
+                            }
+                            .scrollIndicators(.hidden)
+                            .listStyle(PlainListStyle())
+                        }
+                        .navigationTitle(NavigationTitles.searchPage.rawValue)
+                    }
                 }
-                .navigationTitle(NavigationTitles.searchPage.rawValue)
             }
         }
         .tint(colorScheme == .dark ? Color.white : Color.black)

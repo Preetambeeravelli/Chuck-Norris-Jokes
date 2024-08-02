@@ -10,7 +10,6 @@ import SwiftUI
 struct HomePage: View {
     @StateObject var homePageVM = HomePageViewModel()
     @Environment(\.colorScheme) var colorScheme
-//    @State var selectedCategory: String? = nil
     
     var body: some View {
         VStack{
@@ -27,7 +26,7 @@ struct HomePage: View {
                                 Text("\(joke.value.capitalized)")
                                     .multilineTextAlignment(.leading)
                                     .font(.system(size: 36, weight: .semibold, design: .monospaced))
-                                    .minimumScaleFactor(0.6)
+                                    .minimumScaleFactor(0.4)
                                     .frame(alignment: .leading)
                                     .padding()
                             case true:

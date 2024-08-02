@@ -8,13 +8,15 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 class SearchViewModel: ObservableObject{
     @Published var searchText: String = ""
+    @Published var hasError: Bool = false
     @Published var searchResults: [JokesModel] = []
     
     func fetchQuotesWithSearchText(searchText: String){
         let networkManager = NetworkManager<SearchJokeModel>(requestType: .query(searchText))
-        networkManager.makeRequest { result in
+        networkManager.makeRequest { [self] result in
             switch result {
             case .success(let jokes):
                 DispatchQueue.main.async{
@@ -22,6 +24,7 @@ class SearchViewModel: ObservableObject{
                 }
             case .failure(let error):
                 print("Error: \(error)")
+                changeErrorStatus()
             }
         }
     }
@@ -30,5 +33,9 @@ class SearchViewModel: ObservableObject{
 extension SearchViewModel{
     func emptySearchText(){
         self.searchText = ""
+    }
+    
+    func changeErrorStatus(){
+        self.hasError.toggle()
     }
 }
