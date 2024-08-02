@@ -29,7 +29,6 @@ struct CategoriesScrollView: View {
                     .onTapGesture {
                         withAnimation(.easeInOut) {
                             selectedCategory = category
-                            print("category selected")
                         }
                     }
                 }

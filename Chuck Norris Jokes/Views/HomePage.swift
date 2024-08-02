@@ -38,7 +38,7 @@ struct HomePage: View {
             }
             HStack {
                 Button(action: {
-                    homePageVM.fetchRandomQuotes()
+                    homePageVM.fetchAppropriateQuote()
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
