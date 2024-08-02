@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State var searchText: String = ""
-    @StateObject var vm = SearchViewModel()
+    
+    @StateObject var searchViewModel = SearchViewModel()
     @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         NavigationStack {
             VStack{
-                TextFieldView(searchText: $searchText) {
-                    vm.fetchQuotesWithSearchText(searchText: searchText)
-                    searchText = ""
+                TextFieldView(searchText: $searchViewModel.searchText) {
+                    searchViewModel.fetchQuotesWithSearchText(searchText: searchViewModel.searchText)
+                    searchViewModel.emptySearchText()
                 }
                 GeometryReader{ geometry in
                     List {
-                        ForEach(vm.searchResults) { favJoke in
+                        ForEach(searchViewModel.searchResults) { favJoke in
                             NavigationLink {
                                 FavouriteDetalPageView(viewModel: FavouritesDetailPageViewModel(favJokeModel: favJoke))
                                     .toolbarRole(.editor)
@@ -34,7 +35,7 @@ struct SearchView: View {
                     .scrollIndicators(.hidden)
                     .listStyle(PlainListStyle())
                 }
-                .navigationTitle("Search Norris")
+                .navigationTitle(NavigationTitles.searchPage.rawValue)
             }
         }
         .tint(colorScheme == .dark ? Color.white : Color.black)

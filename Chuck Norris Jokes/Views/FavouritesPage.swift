@@ -10,6 +10,7 @@ import SwiftUI
 struct FavouritesPage: View {
     @ObservedObject var vm = FavouritesPageViewModel()
     @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
@@ -31,11 +32,12 @@ struct FavouritesPage: View {
                     vm.loadFavorites()
                 }
             }
-            .navigationTitle("Favourites")
+            .navigationTitle(NavigationTitles.favourites.rawValue)
             .onAppear{
                 vm.loadFavorites()
             }
-        }.tint(colorScheme == .dark ? Color.white : Color.black)
+        }
+        .tint(colorScheme == .dark ? Color.white : Color.black)
         
     }
 }

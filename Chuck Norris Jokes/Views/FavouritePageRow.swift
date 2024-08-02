@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavouritePageRow: View {
     var joke: String
+    
     var body: some View {
         VStack{
             RoundedRectangle(cornerRadius: 10)

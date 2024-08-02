@@ -10,6 +10,7 @@ import SwiftUI
 struct FavouriteDetalPageView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: FavouritesDetailPageViewModel
+    
     var body: some View {
         VStack(spacing: 10){
             RoundedRectangle(cornerRadius: 10)
@@ -22,34 +23,18 @@ struct FavouriteDetalPageView: View {
                         .padding()
                 }
             HStack{
-                Button(action: {
-                    ShareViewModel(text: viewModel.favJokeModel.value).shareText()
-                }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(lineWidth: 2)
-                            .frame(height: 70)
-                        Image(systemName: "square.and.arrow.up")
-                            .font(.title)
-                            .fontWeight(.semibold)
-                    }
-                })
+                ShareLink(item: viewModel.favJokeModel.value) {
+                    AppButtonView(buttonImage: .share)
+                }
                 Button(action: {
                     viewModel.toggleFavoriteStatus()
                 }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(lineWidth: 2)
-                            .frame(height: 70)
-                        Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
-                            .font(.title)
-                            .fontWeight(.semibold)
-                    }
+                    AppButtonView(buttonImage: .heart)
                 })
             }
             .tint(colorScheme == . dark ? Color.white :Color.black)
         }
-        .navigationTitle("Favourite")
+        .navigationTitle(NavigationTitles.favourite.rawValue)
         .navigationBarTitleDisplayMode(.inline)
         .padding()
     }

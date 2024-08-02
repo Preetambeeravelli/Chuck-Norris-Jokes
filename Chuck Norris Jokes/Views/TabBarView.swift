@@ -7,15 +7,9 @@
 
 import SwiftUI
 
-enum Tab: String, CaseIterable{
-    case house, heart, magnifyingglass
-}
-
 struct TabBarView: View {
     @Binding var currentTab: Tab
-    private var fillImage: String{
-        return currentTab.rawValue + ".fill"
-    }
+
     var body: some View {
         VStack{
             RoundedRectangle(cornerRadius: 30)
@@ -40,6 +34,12 @@ struct TabBarView: View {
                 }
         }
         .padding(.horizontal)
+    }
+}
+
+extension TabBarView{
+    private var fillImage: String{
+        return currentTab.rawValue + ".fill"
     }
 }
 

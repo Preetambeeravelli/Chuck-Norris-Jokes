@@ -6,12 +6,18 @@
 //
 
 import Foundation
+import SwiftUI
 
 @MainActor
 class HomePageViewModel: ObservableObject{
+    
+    @Published var hasFetched = false
+    @Published var selectedCategory: String? = nil
+    
     @Published var joke: JokesModel?
     @Published var favouriteJokes: [JokesModel] = []
     @Published var isLoading: Bool = false
+    
     let networkManager = NetworkManager<JokesModel>(requestType: .random)
     let userDefaultsManager = UserDefaultsManager.shared
     
@@ -66,4 +72,7 @@ class HomePageViewModel: ObservableObject{
         favouriteJokes = userDefaultsManager.loadFavorites()
     }
 
+}
+
+extension HomePageViewModel{
 }

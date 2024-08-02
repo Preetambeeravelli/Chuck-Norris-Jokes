@@ -9,16 +9,15 @@ import SwiftUI
 
 struct HomePage: View {
     @StateObject var homePageVM = HomePageViewModel()
-    @State var hasFetched = false
     @Environment(\.colorScheme) var colorScheme
-    @State var selectedCategory: String? = nil
+//    @State var selectedCategory: String? = nil
     
     var body: some View {
         VStack{
             VStack(spacing: 0){
-                Text("Random Joke")
+                Text(Apptexts.randomJoke.rawValue)
                     .font(.system(size: 36, weight: .heavy, design: .monospaced))
-                CategoriesScrollView(selectedCategory: $selectedCategory)
+                CategoriesScrollView(selectedCategory: $homePageVM.selectedCategory)
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 2)
                     .overlay {
@@ -46,7 +45,7 @@ struct HomePage: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(lineWidth: 2)
                             .frame(width: UIScreen.main.bounds.width * 0.7, height: 70, alignment: .center)
-                        Text("Refresh")
+                        Text(Apptexts.refresh.rawValue)
                             .font(.system(size: 24, weight: .bold, design: .monospaced))
                     }
                 })
@@ -64,7 +63,7 @@ struct HomePage: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(lineWidth: 2)
                             .frame(height: 70)
-                        Image(systemName: homePageVM.joke.flatMap { homePageVM.isFavorite($0) } == true ? "heart.fill" : "heart")
+                        Image(systemName: homePageVM.joke.flatMap { homePageVM.isFavorite($0) } == true ? systemImageNames.heartFill.rawValue : systemImageNames.heart.rawValue)
                             .font(.title)
                             .fontWeight(.semibold)
                     }
@@ -74,13 +73,13 @@ struct HomePage: View {
         }
         .padding([.top, .horizontal])
         .onAppear {
-            if !hasFetched {
+            if !homePageVM.hasFetched {
                 homePageVM.fetchRandomQuotes()
-                hasFetched = true
+                homePageVM.hasFetched = true
             }
         }
-        .onChange(of: selectedCategory) {
-            homePageVM.fetchRandomQuotesWith(category: selectedCategory)
+        .onChange(of: homePageVM.selectedCategory) {
+            homePageVM.fetchRandomQuotesWith(category: homePageVM.selectedCategory)
         }
     }
 }

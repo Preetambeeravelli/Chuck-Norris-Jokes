@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 
 class SearchViewModel: ObservableObject{
+    @Published var searchText: String = ""
     @Published var searchResults: [JokesModel] = []
     
     func fetchQuotesWithSearchText(searchText: String){
@@ -23,5 +25,10 @@ class SearchViewModel: ObservableObject{
             }
         }
     }
-    
+}
+
+extension SearchViewModel{
+    func emptySearchText(){
+        self.searchText = ""
+    }
 }
