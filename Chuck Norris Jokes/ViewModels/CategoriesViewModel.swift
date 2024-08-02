@@ -16,7 +16,7 @@ class CategoriesViewModel: ObservableObject {
             switch result {
             case .success(let categories):
                 DispatchQueue.main.async {
-                    self.allCategories = categories.map { $0.capitalized } // Ensure categories are capitalized
+                    self.allCategories = categories.map { $0.capitalized }
                 }
             case .failure(let error):
                 print("Error: \(error)")

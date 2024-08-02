@@ -28,7 +28,11 @@ struct CategoriesScrollView: View {
                     )
                     .onTapGesture {
                         withAnimation(.easeInOut) {
-                            selectedCategory = category
+                            if selectedCategory == category{
+                                selectedCategory = nil
+                            }else{
+                                selectedCategory = category
+                            }
                         }
                     }
                 }

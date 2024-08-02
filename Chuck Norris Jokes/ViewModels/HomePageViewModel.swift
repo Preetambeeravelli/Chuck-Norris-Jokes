@@ -18,19 +18,11 @@ class HomePageViewModel: ObservableObject{
     @Published var favouriteJokes: [JokesModel] = []
     @Published var isLoading: Bool = false
     
-    let networkManager = NetworkManager<JokesModel>(requestType: .random)
     let userDefaultsManager = UserDefaultsManager.shared
+    let networkManager = NetworkManager<JokesModel>(requestType: .random)
     
     init() {
-            loadFavorites()
-        }
-    func fetchAppropriateQuote(){
-        switch selectedCategory{
-        case .none:
-            fetchRandomQuotes()
-        case .some(let category):
-            fetchRandomQuotesWith(category: category)
-        }
+        loadFavorites()
     }
     
     func fetchRandomQuotes(){
@@ -79,8 +71,15 @@ class HomePageViewModel: ObservableObject{
     private func loadFavorites() {
         favouriteJokes = userDefaultsManager.loadFavorites()
     }
-
 }
 
 extension HomePageViewModel{
+    func fetchAppropriateQuote(){
+        switch selectedCategory{
+        case .none:
+            fetchRandomQuotes()
+        case .some(let category):
+            fetchRandomQuotesWith(category: category)
+        }
+    }
 }
