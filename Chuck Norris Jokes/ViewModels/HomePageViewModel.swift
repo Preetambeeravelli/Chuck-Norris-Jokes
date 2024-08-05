@@ -18,6 +18,8 @@ class HomePageViewModel: ObservableObject{
     @Published var favouriteJokes: [JokesModel] = []
     @Published var isLoading: Bool = false
     
+    @Published var errorOccured = false
+    
     let userDefaultsManager = UserDefaultsManager.shared
     let networkManager = NetworkManager<JokesModel>(requestType: .random)
     
@@ -25,32 +27,34 @@ class HomePageViewModel: ObservableObject{
         loadFavorites()
     }
     
-    func fetchRandomQuotes(){
-        isLoading = true
-        networkManager.makeRequest { result in
+    private func fetchRandomQuotes(){
+        networkManager.makeRequest { [self] result in
             switch result {
             case .success(let joke):
                 DispatchQueue.main.async{
                     self.joke = joke
                     self.isLoading = false
+                    self.errorOccured = false
                 }
-            case .failure(let error):
-                print("Error: \(error)")
+            case .failure(_):
+                errorOccured = true
             }
         }
     }
     
-    func fetchRandomQuotesWith(category: String?){
+    private func fetchRandomQuotesWith(category: String?){
         guard let category = category else {return}
         let networkManager2 = NetworkManager<JokesModel>(requestType: .categorySearch(category.lowercased()))
-        networkManager2.makeRequest { result in
+        networkManager2.makeRequest { [self] result in
             switch result {
             case .success(let joke):
                 DispatchQueue.main.async{
                     self.joke = joke
+                    self.isLoading = false
+                    self.errorOccured = false
                 }
-            case .failure(let error):
-                print("Error: \(error)")
+            case .failure(_):
+                errorOccured = true
             }
         }
     }
@@ -75,11 +79,22 @@ class HomePageViewModel: ObservableObject{
 
 extension HomePageViewModel{
     func fetchAppropriateQuote(){
+        isLoading = true
         switch selectedCategory{
         case .none:
             fetchRandomQuotes()
         case .some(let category):
             fetchRandomQuotesWith(category: category)
         }
+    }
+}
+
+extension HomePageViewModel{
+    func getImageName() -> String{
+        joke.flatMap { isFavorite($0) } == true ? systemImageNames.heartFill.rawValue : systemImageNames.heart.rawValue
+    }
+    
+    func toggleError(){
+        errorOccured.toggle()
     }
 }

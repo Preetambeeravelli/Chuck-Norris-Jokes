@@ -11,6 +11,7 @@ struct AlertView: View {
     var title: String
     var message: String?
     var dismissAction: () -> Void
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack(spacing: 20) {
@@ -31,11 +32,11 @@ struct AlertView: View {
                     Text("OK")
                         .font(.system(size: 24, weight: .bold, design: .monospaced))
                 }
-            }).tint(Color.black)
-                
+            })  
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 2))
+        .tint(colorScheme == .dark ? .white : .black)
     }
 }
 

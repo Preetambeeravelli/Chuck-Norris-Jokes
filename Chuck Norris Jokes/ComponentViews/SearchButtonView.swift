@@ -18,7 +18,7 @@ struct SearchButtonView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(lineWidth: 2)
             )
-            .tint(colorScheme == .dark ? Color.white : Color.black)
+            .tint(colorScheme == .dark ? .white : .black)
     }
 }
 

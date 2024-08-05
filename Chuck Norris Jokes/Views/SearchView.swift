@@ -47,7 +47,7 @@ struct SearchView: View {
                 }
             }
         }
-        .tint(colorScheme == .dark ? Color.white : Color.black)
+        .tint(colorScheme == .dark ? .white : .black)
     }
 }
 
