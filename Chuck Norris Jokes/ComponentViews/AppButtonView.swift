@@ -19,7 +19,7 @@ struct AppButtonView: View {
                 .font(.title)
                 .fontWeight(.semibold)
         }
-        .tint(colorScheme == .dark ? Color.white : Color.black)
+        .tint(colorScheme == .dark ? .white : .black)
     }
 }
 

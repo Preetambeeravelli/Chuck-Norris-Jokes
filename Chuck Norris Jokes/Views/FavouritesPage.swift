@@ -37,7 +37,7 @@ struct FavouritesPage: View {
                 vm.loadFavorites()
             }
         }
-        .tint(colorScheme == .dark ? Color.white : Color.black)
+        .tint(colorScheme == .dark ? .white : .black)
     }
 }
 
