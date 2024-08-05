@@ -14,8 +14,9 @@ struct HomePage: View {
     var body: some View {
         VStack{
             VStack(spacing: 0){
-                Text(Apptexts.randomJoke.rawValue)
-                    .font(.system(size: 36, weight: .heavy, design: .monospaced))
+                    Text(Apptexts.randomJoke.rawValue)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
                 CategoriesScrollView(selectedCategory: $homePageVM.selectedCategory)
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 2)
