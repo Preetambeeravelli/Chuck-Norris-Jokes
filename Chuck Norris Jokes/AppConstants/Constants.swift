@@ -30,10 +30,13 @@ enum ButtonImage: String{
 }
 
 enum Tab: String, CaseIterable{
-    case house, heart, magnifyingglass
+    case house, heart, magnifyingglass = "magnifyingglass.circle"
+    var fillImageName: String{
+        self.rawValue + ".fill"
+    }
 }
 
 enum Apptexts: String{
-    case randomJoke = "Random Joke"
-    case refresh = "Refresh"
+    case randomJoke = "Random Chuck"
+    case refresh = "New Chuck"
 }

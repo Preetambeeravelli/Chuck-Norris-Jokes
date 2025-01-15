@@ -20,7 +20,7 @@ struct TabBarView: View {
                     HStack {
                         ForEach(Tab.allCases, id: \.self) { tab in
                             Spacer()
-                            Image(systemName: tab.rawValue)
+                            Image(systemName: currentTab == tab ? tab.fillImageName : tab.rawValue)
                                 .font(.title2)
                                 .scaleEffect(currentTab == tab ? 1.35 : 1)
                                 .onTapGesture {
@@ -34,12 +34,6 @@ struct TabBarView: View {
                 }
         }
         .padding(.horizontal)
-    }
-}
-
-extension TabBarView{
-    private var fillImage: String{
-        return currentTab.rawValue + ".fill"
     }
 }
 
