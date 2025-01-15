@@ -28,7 +28,7 @@ struct ContentView: View {
                 }
                 .padding(.top, 2)
             }
-        }
+        }.preferredColorScheme(.dark)
     }
 }
 
